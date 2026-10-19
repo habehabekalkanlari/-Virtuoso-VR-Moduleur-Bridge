@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lexml version="6">
+<node ID="c9bbdd95-d462-4001-bc4a-ca854e2a6237" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[ModuleurController]]></property>
+    <property key="frame" type="r"><![CDATA[0 0 900 600]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="7b681060-d6e0-4672-8f94-df2d2c868750" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[VCO]]></property>
+    <property key="frame" type="r"><![CDATA[10 10 140 500]]></property>
+    <property key="color" type="c"><![CDATA[0.05 0.05 0.05 1]]></property>
+    <property key="script" type="s"><![CDATA[
+-- Moduleur Brain Direct Controller - by REA port
+midiChannel = 1
+function sendCC(cc, val)
+  local v = math.floor(val*127)
+  sendMIDI({type="controlChange", channel=midiChannel, number=cc, value=v})
+end
+]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="aed5f368-84a3-4c54-8845-b249889f4176" type="LABEL">
+<properties>
+    <property key="name" type="s"><![CDATA[VCO_label]]></property>
+    <property key="frame" type="r"><![CDATA[5 5 130 20]]></property>
+    <property key="text" type="s"><![CDATA[VCO]]></property>
+    <property key="color" type="c"><![CDATA[1 1 1 1]]></property>
+</properties>
+<values><value key="text"/></values>
+</node>
+<node ID="95982988-4741-4d8a-b9e7-07d7dbf2c0b3" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[Coarse]]></property>
+    <property key="frame" type="r"><![CDATA[10 40 120 80]]></property>
+    <property key="text" type="s"><![CDATA[Coarse]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=20, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/vco/coarse", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="601d6ee5-2de3-469e-9b2e-187ddbf77267" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[Fine]]></property>
+    <property key="frame" type="r"><![CDATA[10 130 120 60]]></property>
+    <property key="text" type="s"><![CDATA[Fine]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=21, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/vco/fine", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="31b3ffea-f5a1-4e5c-95cc-1918f21f2972" type="BUTTON">
+<properties>
+    <property key="name" type="s"><![CDATA[Wave]]></property>
+    <property key="frame" type="r"><![CDATA[10 200 120 40]]></property>
+    <property key="text" type="s"><![CDATA[Wave]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+</children>
+</node>
+<node ID="e843ecf8-4db0-487d-856f-9657bd9bef65" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[VCF]]></property>
+    <property key="frame" type="r"><![CDATA[160 10 140 500]]></property>
+    <property key="color" type="c"><![CDATA[0.05 0.05 0.05 1]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="b1938a2d-ed90-4d53-8e1b-e51aeb4cd97a" type="LABEL">
+<properties>
+    <property key="name" type="s"><![CDATA[VCF_label]]></property>
+    <property key="frame" type="r"><![CDATA[5 5 130 20]]></property>
+    <property key="text" type="s"><![CDATA[VCF]]></property>
+    <property key="color" type="c"><![CDATA[1 1 1 1]]></property>
+</properties>
+<values><value key="text"/></values>
+</node>
+<node ID="5f763d32-0169-45d6-a9fa-334423f4480f" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[Cutoff]]></property>
+    <property key="frame" type="r"><![CDATA[10 40 120 80]]></property>
+    <property key="text" type="s"><![CDATA[Cutoff]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=74, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/vcf/cutoff", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="614691cd-5d9a-436f-bb3f-17174fc42fc6" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[Res]]></property>
+    <property key="frame" type="r"><![CDATA[10 130 120 60]]></property>
+    <property key="text" type="s"><![CDATA[Res]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=71, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/vcf/res", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+</children>
+</node>
+<node ID="97bdefa8-c617-438a-8b12-c9eef018187c" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[ADSR_VCA]]></property>
+    <property key="frame" type="r"><![CDATA[310 10 140 500]]></property>
+    <property key="color" type="c"><![CDATA[0.05 0.05 0.05 1]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="58d4231a-260b-400d-a37d-7113db7d0ac0" type="LABEL">
+<properties>
+    <property key="name" type="s"><![CDATA[ADSR_VCA_label]]></property>
+    <property key="frame" type="r"><![CDATA[5 5 130 20]]></property>
+    <property key="text" type="s"><![CDATA[ADSR_VCA]]></property>
+    <property key="color" type="c"><![CDATA[1 1 1 1]]></property>
+</properties>
+<values><value key="text"/></values>
+</node>
+<node ID="1c443df1-f868-4dc3-bab4-85d21b4d68f0" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[A]]></property>
+    <property key="frame" type="r"><![CDATA[10 40 25 200]]></property>
+    <property key="text" type="s"><![CDATA[A]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=73, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/adsr_vca/a", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="d3069c58-773f-4b92-9aa3-2696efc7cc52" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[D]]></property>
+    <property key="frame" type="r"><![CDATA[40 40 25 200]]></property>
+    <property key="text" type="s"><![CDATA[D]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=75, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/adsr_vca/d", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="5a9e994f-0c4b-4099-a10d-7bd4d7d27bf7" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[S]]></property>
+    <property key="frame" type="r"><![CDATA[70 40 25 200]]></property>
+    <property key="text" type="s"><![CDATA[S]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=76, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/adsr_vca/s", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="c83df5c8-f523-4013-9723-4fb85e532649" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[R]]></property>
+    <property key="frame" type="r"><![CDATA[100 40 25 200]]></property>
+    <property key="text" type="s"><![CDATA[R]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=72, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/adsr_vca/r", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+</children>
+</node>
+<node ID="233108d5-2ddb-4185-985a-12b1767facaf" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[MIXER]]></property>
+    <property key="frame" type="r"><![CDATA[460 10 140 500]]></property>
+    <property key="color" type="c"><![CDATA[0.05 0.05 0.05 1]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="eccf0ba5-ac5d-4c10-8db9-c009a529adac" type="LABEL">
+<properties>
+    <property key="name" type="s"><![CDATA[MIXER_label]]></property>
+    <property key="frame" type="r"><![CDATA[5 5 130 20]]></property>
+    <property key="text" type="s"><![CDATA[MIXER]]></property>
+    <property key="color" type="c"><![CDATA[1 1 1 1]]></property>
+</properties>
+<values><value key="text"/></values>
+</node>
+<node ID="861e834c-a3ff-4e48-9bac-98b82bc870ed" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[CH1]]></property>
+    <property key="frame" type="r"><![CDATA[10 40 50 200]]></property>
+    <property key="text" type="s"><![CDATA[CH1]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=7, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/mixer/ch1", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="f0b6b28e-a28a-4557-9aad-3d168247736a" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[CH2]]></property>
+    <property key="frame" type="r"><![CDATA[70 40 50 200]]></property>
+    <property key="text" type="s"><![CDATA[CH2]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=8, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/mixer/ch2", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+</children>
+</node>
+<node ID="31d3ab59-6150-43f6-bcbe-0c2a164a04ff" type="GROUP">
+<properties>
+    <property key="name" type="s"><![CDATA[BRAIN]]></property>
+    <property key="frame" type="r"><![CDATA[610 10 270 500]]></property>
+    <property key="color" type="c"><![CDATA[0.05 0.05 0.05 1]]></property>
+    <property key="script" type="s"><![CDATA[
+-- Moduleur Brain Direct Controller - by REA port
+midiChannel = 1
+function sendCC(cc, val)
+  local v = math.floor(val*127)
+  sendMIDI({type="controlChange", channel=midiChannel, number=cc, value=v})
+end
+]]></property>
+</properties>
+<values><value key="touch"/></values>
+<children>
+<node ID="f38645ff-de5f-4b4c-a443-3b7422f81327" type="LABEL">
+<properties>
+    <property key="name" type="s"><![CDATA[BRAIN_label]]></property>
+    <property key="frame" type="r"><![CDATA[5 5 260 20]]></property>
+    <property key="text" type="s"><![CDATA[BRAIN]]></property>
+    <property key="color" type="c"><![CDATA[1 1 1 1]]></property>
+</properties>
+<values><value key="text"/></values>
+</node>
+<node ID="f2a8201c-8d77-4ac4-8e94-c9b79bb630ca" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[POT_A]]></property>
+    <property key="frame" type="r"><![CDATA[10 40 70 100]]></property>
+    <property key="text" type="s"><![CDATA[POT_A]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=16, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/brain/pot_a", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="60e0d8a5-7df1-43ff-9ad6-25f5d78ecb4b" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[POT_B]]></property>
+    <property key="frame" type="r"><![CDATA[90 40 70 100]]></property>
+    <property key="text" type="s"><![CDATA[POT_B]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=17, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/brain/pot_b", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+<node ID="4c8c342f-a40e-44c9-84e9-c36d7c240589" type="FADER">
+<properties>
+    <property key="name" type="s"><![CDATA[POT_C]]></property>
+    <property key="frame" type="r"><![CDATA[170 40 70 100]]></property>
+    <property key="text" type="s"><![CDATA[POT_C]]></property>
+    <property key="script" type="s"><![CDATA[function onValueChanged(key) if key=="x" then sendMIDI({type="controlChange", channel=1, number=18, value=math.floor(self.values.x*127)}) sendOSC("/moduleur/brain/pot_c", self.values.x) end end]]></property>
+</properties>
+<values><value key="x" default="0.5"/><value key="touch"/></values>
+</node>
+</children>
+</node>
+</children>
+</node>
+</lexml>
