@@ -1,3 +1,4 @@
+<img width="2204" height="1888" alt="Ekran Görüntüsü 2026-11-08 23-46-49" src="https://github.com/user-attachments/assets/950aded2-d326-4543-b54c-33117f54cf66" />
 # Moduleur TouchOSC Controller
 
 İlk kod denemem! 🎉
